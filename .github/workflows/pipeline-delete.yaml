@@ -11,9 +11,9 @@ on:
   workflow_dispatch:
 # Env to set reusable variables.
 env:
-  RGNAME: rgcicd4aksaug9
-  ACRNAME: acr4aksaug9
-  AKSNAME: aks4cicdaug9
+  AZURE_RG_NAME: Operator-QA-ResourceGroup
+  AZURE_CONTAINER_REGISTRY: OperatorQAContainerRegistry
+  AKSNAME: aks4cicdaug8
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains 3  jobs called Platform,Build and Deploy
@@ -31,7 +31,7 @@ jobs:
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
-      - name: Az RG Delete
-        run: az group delete --name $RGNAME -y --no-wait
+      #- name: Az RG Delete
+      #  run: az group delete --name $RGNAME -y --no-wait
       - name: Az RG Delete for Kube Cluster
         run: az group list --query "[?starts_with(name,'MC')].[name]" --output tsv | xargs -L1 bash -c 'az group delete --name $0 --no-wait --yes'
