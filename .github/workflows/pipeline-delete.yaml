@@ -9,7 +9,7 @@ on:
     - .github/workflows/pipeline-delete.yaml
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
-# Env to set reusable variables
+# Env to set reusable variables.
 env:
   RGNAME: rgcicd4aksaug9
   ACRNAME: acr4aksaug9
