@@ -31,7 +31,10 @@ jobs:
       - name: az CLI login
         uses: azure/login@v1
         with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
+          #creds: ${{ secrets.AZURE_CREDENTIALS }}
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
       #- name: Az RG Create
       #  run: az group create --name $RGNAME -l westus
       - name: AZ AKS Create
