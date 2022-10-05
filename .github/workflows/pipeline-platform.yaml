@@ -12,9 +12,9 @@ on:
   workflow_dispatch:
 # Env to set reusable variables
 env:
-  RGNAME: rgcicd4aksaug9
-  ACRNAME: acr4aksaug9
-  AKSNAME: aks4cicdaug9
+  RGNAME: Operator-QA-ResourceGroup
+  ACRNAME: OperatorQAContainerRegistry
+  AKSNAME: aks4cicdaug8
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single  job called Platform to create the AKS Cluster
@@ -32,12 +32,12 @@ jobs:
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
-      - name: Az RG Create
-        run: az group create --name $RGNAME -l eastus
+      #- name: Az RG Create
+      #  run: az group create --name $RGNAME -l westus
       - name: AZ AKS Create
-        run: az aks create -n $AKSNAME -g $RGNAME --generate-ssh-keys -l eastus --service-principal ${{ secrets.clientId }} --client-secret ${{ secrets.clientSecret }}
+        run: az aks create -n $AKSNAME -g $RGNAME --generate-ssh-keys -l westus --service-principal ${{ secrets.clientId }} --client-secret ${{ secrets.clientSecret }}
       # Manually Create a Service Principal and configure Github Actions to use sp to connect to Subscription.
-      - name: Az ACR Create
-        run: az acr create -n $ACRNAME -g $RGNAME -l eastus --sku Basic
+      #- name: Az ACR Create
+      #  run: az acr create -n $ACRNAME -g $RGNAME -l westus --sku Basic
       - name: Az ACR attach to AKS
         run: az aks update -n $AKSNAME -g $RGNAME --attach-acr $ACRNAME
