@@ -12,8 +12,8 @@ on:
   workflow_dispatch:
 # Env to set reusable variables
 env:
-  RGNAME: rgcicd4aksaug9
-  ACRNAME: acr4aksaug9
+  RGNAME: Operator-QA-ResourceGroup
+  ACRNAME: OperatorQAContainerRegistry
   AKSNAME: aks4cicdaug9
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
